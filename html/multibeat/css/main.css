@@ -1,0 +1,75 @@
+html {
+    height:100%;
+    margin: 0px;
+}
+
+body {
+    height:100%;
+    margin: 0px;
+    font-family: 'Cabin';
+    margin: auto;
+    background: #3e4147;
+    /*-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;*/
+}
+
+@font-face {
+    font-family: "Cabin";
+    src: url("../../font/Cabin-Regular-TTF.ttf");
+}
+
+@font-face {
+    font-family: "Molot";
+    src: url("../../font/Molot.otf");
+}
+
+h1 {
+    position: absolute;
+    width: 380px;
+    text-align: center;
+    top: -50px;
+    font-family: 'Molot';
+    color: #5e798c;
+}
+
+form {
+    margin-top: 50px;
+    text-align: center;
+    width: 100%;
+    font-family: 'Cabin';
+}
+
+input[type='text'] {
+    /*** Transition Selectors - What properties to animate and how long ***/
+    width: 148px;
+    background: #E4E4E4;
+    text-align: center;
+    border-radius: 2px;
+    border: none;
+    margin-left: 4px;
+    color: #3e4147;
+    -webkit-transition-property: -webkit-box-shadow, background;
+    -webkit-transition-duration: 0.3s;
+    margin-bottom: 0px;
+    display: inline-block;
+}
+
+input[type='submit'] {
+    width: 150px;
+    color: #5e7a8d;
+    text-transform: uppercase;
+    /*text-shadow: #000 1px 1px;*/
+    border-radius: 2px;
+    margin-top: 5px;
+    background: #3e4147;
+    border: 2px solid #5e7a8d;
+}
+
+input[type='text']:focus {
+    outline: none;
+    -webkit-box-shadow:inset 2px 2px 3px rgba(62, 65, 71, 0.75), inset -2px -2px 3px rgba(62, 65, 71, 0.75);
+}

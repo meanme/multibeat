@@ -1,0 +1,28 @@
+#menuButtons {
+    text-align: center;
+    width: 300px;
+    height: 200px;
+    margin: 50px auto auto;
+
+    background: #62646b;
+    border-radius: 3px;
+}
+
+#menuButtons button {
+    width: 100%;
+}
+
+#menuButtons input {
+    width: 280px;
+}
+
+#connected {
+    display: none;
+    text-align: center;
+    width: 300px;
+    height: 200px;
+    margin: 50px auto auto;
+
+    background: #62646b;
+    border-radius: 3px;
+}
