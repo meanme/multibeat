@@ -31,6 +31,18 @@ main - Entry point for multibeatt
     }, {
       id: "03",
       src: "src/03.wav"
+    }, {
+      id: "loop00",
+      src: "src/loops/looperman-l-0345547-0056297-cufool-im-alive-kick-and-percussion.wav"
+    }, {
+      id: "loop01",
+      src: "src/loops/looperman-l-0379853-0060060-alen9r-dance-time-drums.wav"
+    }, {
+      id: "loop02",
+      src: "src/loops/looperman-l-0563503-0044350-tonypowell-trance-loop-with-bass.wav"
+    }, {
+      id: "loop03",
+      src: "src/loops/looperman-l-0671112-0065844-danke-melodic.wav"
     }
   ];
 
@@ -67,43 +79,8 @@ main - Entry point for multibeatt
   };
 
   init = function(element) {
+    var _this = this;
     $(document.body).addClass('ready');
-    preloadImage(imgSources);
-  };
-
-  initApp = function() {
-    var assetPath,
-      _this = this;
-    connection = new Connection(socketUrl);
-    $("#create").click(function() {
-      console.log('click create');
-      return connection.create(function() {
-        return $("#menuButtons").fadeOut();
-      });
-    });
-    $("#join").click(function() {
-      console.log('join');
-      return connection.join(0, function() {
-        console.log('connection join complete');
-        return $("#menuButtons").fadeOut();
-      });
-    });
-    client = new MultiBeatClient();
-    /*socket = io.connect socketUrl
-    socket.on 'connect', (message) ->
-        console.log 'connected'
-    
-    socket.on 'greetings', (message) ->
-        console.log "MESSAGE: #{message}"
-    */
-
-    assetPath = 'src/00.wav';
-    /*createjs.Sound.addEventListener 'fileload', (event) ->
-        console.log 'sound play'
-        createjs.Sound.play event.src
-    createjs.Sound.registerSound assetPath
-    */
-
     createjs.Sound.addEventListener('fileload', function(event) {
       if (++soundsLoaded >= soundMainfest.length) {
         return console.log('all sounds loaded');
@@ -114,6 +91,53 @@ main - Entry point for multibeatt
       return console.log(event);
     });
     createjs.Sound.registerManifest(soundMainfest, './');
+    preloadImage(imgSources);
+  };
+
+  initApp = function() {
+    connection = new Connection(socketUrl);
+    $("#create").click(function() {
+      console.log('click create');
+      return connection.create(function() {
+        return $("#menuButtons").fadeOut();
+      });
+    });
+    $("#join").click(function() {
+      var groupId;
+      groupId = $('#groupId').val();
+      console.log(groupId);
+      console.log(groupId !== "");
+      if ((groupId != null) && groupId !== "") {
+        return connection.join(groupId, function() {
+          console.log('connection join complete');
+          return $("#menuButtons").fadeOut();
+        });
+      } else {
+        return alert('Please enter the group Id');
+      }
+    });
+    client = new MultiBeatClient();
+    /*socket = io.connect socketUrl
+    socket.on 'connect', (message) ->
+        console.log 'connected'
+    
+    socket.on 'greetings', (message) ->
+        console.log "MESSAGE: #{message}"
+    */
+
+    $("#settingsButton").toggle((function() {
+      return $("#cointentOffset").animate({
+        left: "-360px"
+      }, 1000);
+    }), function() {
+      return $("#cointentOffset").animate({
+        left: "0px"
+      }, 1000);
+    });
+    /*connection.create () ->
+        $("#menuButtons").fadeOut()
+    */
+
   };
 
   requestAnimFrame = (function() {

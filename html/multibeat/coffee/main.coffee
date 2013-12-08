@@ -15,7 +15,12 @@ soundMainfest = [
     { id: "00", src: "src/00.wav"},
     { id: "01", src: "src/01.wav"},
     { id: "02", src: "src/02.wav"},
-    { id: "03", src: "src/03.wav"}
+    { id: "03", src: "src/03.wav"},
+
+    { id: "loop00", src: "src/loops/looperman-l-0345547-0056297-cufool-im-alive-kick-and-percussion.wav"},
+    { id: "loop01", src: "src/loops/looperman-l-0379853-0060060-alen9r-dance-time-drums.wav"},
+    { id: "loop02", src: "src/loops/looperman-l-0563503-0044350-tonypowell-trance-loop-with-bass.wav"},
+    { id: "loop03", src: "src/loops/looperman-l-0671112-0065844-danke-melodic.wav"}
 ]
 soundsLoaded = 0
 
@@ -41,6 +46,16 @@ init = (element) ->
     #Set up carousel
     $(document.body).addClass 'ready'
 
+    # TODO - Use a proxy, get rid of soundsLoaded
+    createjs.Sound.addEventListener 'fileload', (event)=>
+        if ++soundsLoaded >= soundMainfest.length
+            console.log 'all sounds loaded'
+
+    createjs.Sound.addEventListener 'loadComplete', (event)->
+        console.log 'manifest loaded'
+        console.log event
+    createjs.Sound.registerManifest soundMainfest, './'
+
     preloadImage imgSources
     return
 
@@ -53,13 +68,18 @@ initApp = () ->
             $("#menuButtons").fadeOut()
 
     $("#join").click () ->
-        console.log 'join'
-        connection.join 0, () ->
-            console.log 'connection join complete'
-            $("#menuButtons").fadeOut()
+        groupId = $('#groupId').val()
+
+        console.log groupId
+        console.log (groupId isnt "")
+        if groupId? and groupId isnt ""
+            connection.join groupId, () ->
+                console.log 'connection join complete'
+                $("#menuButtons").fadeOut()
+        else
+            alert 'Please enter the group Id'
 
     client = new MultiBeatClient()
-
 
     ###socket = io.connect socketUrl
     socket.on 'connect', (message) ->
@@ -68,23 +88,18 @@ initApp = () ->
     socket.on 'greetings', (message) ->
         console.log "MESSAGE: #{message}"###
 
-    assetPath = 'src/00.wav'
-    ###createjs.Sound.addEventListener 'fileload', (event) ->
-        console.log 'sound play'
-        createjs.Sound.play event.src
-    createjs.Sound.registerSound assetPath###
+    $("#settingsButton").toggle (->
+        $("#cointentOffset").animate
+            left: "-360px"
+        , 1000
+    ), ->
+        $("#cointentOffset").animate
+            left: "0px"
+        , 1000
 
-
-    # TODO - Use a proxy, get rid of soundsLoaded
-    createjs.Sound.addEventListener 'fileload', (event)=>
-        if ++soundsLoaded >= soundMainfest.length
-            console.log 'all sounds loaded'
-
-    createjs.Sound.addEventListener 'loadComplete', (event)->
-        console.log 'manifest loaded'
-        console.log event
-    createjs.Sound.registerManifest soundMainfest, './'
-
+    #DEBUG - Connect automatically
+    ###connection.create () ->
+        $("#menuButtons").fadeOut()###
 
     return
 

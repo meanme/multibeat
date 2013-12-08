@@ -18,29 +18,20 @@ body {
 }
 
 @font-face {
-    font-family: "Cabin";
-    src: url("../../font/Cabin-Regular-TTF.ttf");
+    font-family: "CodeBold";
+    src: url("../../font/CodeBold.otf");
 }
 
 @font-face {
-    font-family: "Molot";
-    src: url("../../font/Molot.otf");
+    font-family: "Cabin";
+    src: url("../../font/cabin/Cabin-Regular.otf");
 }
 
 h1 {
-    position: absolute;
-    width: 380px;
     text-align: center;
-    top: -50px;
-    font-family: 'Molot';
-    color: #5e798c;
-}
-
-form {
-    margin-top: 50px;
-    text-align: center;
-    width: 100%;
-    font-family: 'Cabin';
+    font-family: 'CodeBold';
+    color: #3e4147;
+    padding-top: 15px;
 }
 
 input[type='text'] {
@@ -72,4 +63,17 @@ input[type='submit'] {
 input[type='text']:focus {
     outline: none;
     -webkit-box-shadow:inset 2px 2px 3px rgba(62, 65, 71, 0.75), inset -2px -2px 3px rgba(62, 65, 71, 0.75);
+}
+
+.vertical-container {
+    display: -webkit-flex;
+    display: flex;
+    height: 100%;
+}
+
+.vertically-centered {
+    margin: auto;
+    -webkit-flex: 1;
+    flex:1;
+    position: relative;
 }

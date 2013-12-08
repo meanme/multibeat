@@ -1,8 +1,8 @@
 #menuButtons {
     text-align: center;
-    width: 300px;
-    height: 200px;
-    margin: 50px auto auto;
+    width: 360px;
+    height: 400px;
+    margin: auto;
 
     background: #62646b;
     border-radius: 3px;
@@ -10,19 +10,52 @@
 
 #menuButtons button {
     width: 100%;
+    margin-top: 10px;
 }
 
 #menuButtons input {
-    width: 280px;
+    width: 290px;
 }
 
-#connected {
-    display: none;
+#instructions {
+    font-family: 'Cabin';
+    font-weight: normal;
+    font-size: 10pt;
+    padding: 10px;
+    text-align: justify;
+    color: #FFFFFF;
+    text-shadow: #000 1px 1px;
+}
+
+#buttonContainer {
     text-align: center;
     width: 300px;
-    height: 200px;
-    margin: 50px auto auto;
+    margin-left: 30px;
+}
 
-    background: #62646b;
-    border-radius: 3px;
+#buttonContainer button {
+    padding: 7px;
+}
+
+input[type="text"]{
+    padding: 5px;
+    height: 20px;
+
+    /*Applying CSS3 gradient*/
+    /*background: -moz-linear-gradient(center top , #FFFFFF,  #EEEEEE 1px, #FFFFFF 20px);
+    background: -webkit-gradient(linear, left top, left 20, from(#FFFFFF), color-stop(5%, #EEEEEE) to(#FFFFFF));*/
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FBFBFB', endColorstr='#FFFFFF');
+
+    /*Applying CSS 3radius*/
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+
+    /*Applying CSS3 box shadow*//*
+    -moz-box-shadow: 0 0 2px #DDDDDD;
+    -webkit-box-shadow: 0 0 2px #DDDDDD;
+    box-shadow: 0 0 2px #DDDDDD;*/
+
+    float: none;
+    margin: 0 auto;
 }

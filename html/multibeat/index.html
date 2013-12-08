@@ -4,7 +4,7 @@
 <head>
     <title>coffeenode</title>
 
-    <meta name="viewport" content="initial-scale=0.6, user-scalable=0" />
+    <meta name="viewport" content="initial-scale=0.8, user-scalable=0" />
 
     <meta name="description" content="socket.io multiplayer demo" />
     <meta name="keywords" content="socket.io, multiplayer, music, node.js, coffeescript" />
@@ -19,6 +19,7 @@
 
     <link rel="stylesheet" href="css/main.css" type="text/css"/>
     <link rel="stylesheet" href="css/menu.css" type="text/css"/>
+    <link rel="stylesheet" href="css/multibeats.css" type="text/css"/>
 
     <link rel="apple-touch-icon-precomposed" href="img/multi_icon.png"/>
 
@@ -36,22 +37,66 @@
 </head>
 <body>
 
-<div id="menuButtons">
-    MultiBeat
+<div class="vertical-container">
+    <div class = 'vertically-centered'>
+        <div id="menuButtons">
+            <h1>MultiBeat</h1>
 
-    <button id="create">Create</button>
-    <button id="join">Join</button>
-    <input type="text" id="#groupId" placeholder="groupId"/>
-</div>
+            <div id="buttonContainer">
 
-<div id="connected">
-    <div id="musicButtons">
-        <button class="soundButton">00</button>
-        <button class="soundButton">01</button>
-        <button class="soundButton">02</button>
-        <button class="soundButton">03</button>
+            <button id="create">Create</button>
+            <button id="join">Join</button>
+            <input type="text" id="groupId" placeholder="groupId"/>
+
+            </div>
+
+            <div id="instructions">
+                Create your own music group or join other users entering their group id.<br/>
+
+            </div>
+        </div>
+
+        <div id="connected">
+            <header class="beatHeader">
+                <div id="groupLabel"></div>
+                <button id="settingsButton">x</button>
+            </header>
+
+            <div id="contentWrapper">
+                <div id="cointentOffset">
+                    <div id="musicButtons" class="beatContent">
+                        <button class="soundButton">00</button>
+                        <button class="soundButton">01</button>
+                        <button class="soundButton">02</button>
+                        <button class="soundButton">03</button>
+
+                        <div id="loops">
+                            <button class="loopButton">00</button>
+                            <button class="loopButton">01</button>
+                            <button class="loopButton">02</button>
+                            <button class="loopButton">03</button>
+                        </div>
+                    </div>
+
+
+
+                    <div id="settings" class="beatContent">
+                        Test
+                    </div>
+                </div>
+
+            </div>
+
+            <footer>
+                <div id="hostLabel">HOST</div>
+            </footer>
+
+        </div>
+
     </div>
 </div>
+
+
 
 
 <!-- Start of StatCounter Code for Default Guide -->

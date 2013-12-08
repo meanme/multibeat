@@ -31,7 +31,9 @@ Connection
     };
 
     Connection.prototype.init = function(callback) {
+      var _this = this;
       this.socket = io.connect(this.socketUrl);
+      console.log('init connection');
       this.socket.on('connect', function(message) {
         console.log('connected');
         if (callback != null) {
@@ -41,6 +43,11 @@ Connection
       this.socket.on('beat', function(beatId) {
         console.log('connection beat: ' + beatId);
         return EventManager.publish('beat', beatId);
+      });
+      this.socket.on('socketData', function(socketData) {
+        console.log('connection socket data');
+        EventManager.publish('isHost', (socketData != null) && (socketData.host != null) && socketData.host === _this.socket.socket.sessionid);
+        return EventManager.publish('socketData', socketData);
       });
       this.socket.on('data', function(message) {
         return console.log("DATA: " + message);
@@ -63,7 +70,7 @@ Connection
     Connection.prototype.join = function(groupId, callback) {
       var _this = this;
       return this.init(function() {
-        console.log('join a group');
+        console.log('join a group ' + groupId);
         _this.socket.emit('join', groupId);
         EventManager.publish('connected', true);
         if (callback != null) {

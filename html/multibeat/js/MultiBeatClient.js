@@ -14,8 +14,11 @@ MultiBeatClient
 
     function MultiBeatClient() {
       var _this = this;
+      this.instance = null;
       EventManager.subscribe('connected', this.onConnected);
       EventManager.subscribe('beat', this.playBeat);
+      EventManager.subscribe('socketData', this.onSocketData);
+      EventManager.subscribe('isHost', this.initSettings);
       $(".soundButton").click(function(event) {
         /*console.log 'sound button clicked ' + $(event.target).text()
         */
@@ -27,7 +30,37 @@ MultiBeatClient
           payload: beatId
         });
       });
+      $(".loopButton").click(function(event) {
+        var loopId;
+        loopId = "loop" + ($(event.target).text());
+        if (_this.instance != null) {
+          _this.instance.stop();
+        }
+        _this.instance = createjs.Sound.play(loopId, createjs.Sound.INTERRUPT_NONE, 0, 0, -1);
+        if (_this.instance === null || _this.instance.playState === createjs.Sound.PLAY_FAILED) {
+
+        }
+      });
     }
+
+    MultiBeatClient.prototype.initSettings = function(isHost) {
+      if (isHost) {
+        return $("#hostLabel").text('IS HOST');
+      } else {
+        $("#hostLabel").text('NOT HOST');
+        $("#musicButtons").css('height', '100%');
+        return $('#loops').css('display', 'none');
+      }
+    };
+
+    MultiBeatClient.prototype.onSocketData = function(socketData) {
+      console.log('on socket data received');
+      console.log(socketData);
+      if ((socketData != null) && socketData.id !== null) {
+        console.log("Socket Group: " + socketData.id);
+        return $("#groupLabel").text("" + socketData.id);
+      }
+    };
 
     MultiBeatClient.prototype.playBeat = function(beatId) {
       var instance;

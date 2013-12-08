@@ -17,13 +17,20 @@ class Connection
 
     init: (callback) ->
         @socket = io.connect @socketUrl
-        @socket.on 'connect', (message) ->
+        console.log 'init connection'
+        @socket.on 'connect', (message) =>
             console.log 'connected'
             if callback? then do callback
 
         @socket.on 'beat', (beatId) ->
             console.log 'connection beat: ' + beatId
             EventManager.publish 'beat', beatId
+
+        @socket.on 'socketData', (socketData) =>
+            console.log 'connection socket data'
+
+            EventManager.publish 'isHost', (socketData? and socketData.host? and socketData.host is @socket.socket.sessionid)
+            EventManager.publish 'socketData', socketData
 
         @socket.on 'data', (message) ->
             console.log "DATA: #{message}"
@@ -40,7 +47,7 @@ class Connection
 
     join: (groupId, callback) ->
         @init =>
-            console.log 'join a group'
+            console.log 'join a group ' + groupId
             @socket.emit 'join', groupId
             EventManager.publish 'connected', true
 

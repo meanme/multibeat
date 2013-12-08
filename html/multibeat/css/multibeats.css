@@ -1,0 +1,89 @@
+#connected {
+    display: none;
+    text-align: center;
+    width: 360px;
+    height: 400px;
+    margin: auto;
+    background: #62646b;
+    border-radius: 3px;
+}
+
+#contentWrapper {
+    position: relative;
+    height: 65%;
+    overflow: hidden;
+}
+
+#cointentOffset {
+    height: 100%;
+    position: absolute;
+}
+
+.beatContent {
+    width: 360px;
+}
+
+#musicButtons {
+    height: 80%;
+    float: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#loops {
+    margin: auto;
+    height: 20%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#settings {
+    height: 100%;
+    position: absolute;
+    left: 360px;
+}
+
+.soundButton {
+    width: 50%;
+    height: 50%;
+    float: left;
+}
+
+.loopButton {
+
+    float: left;
+    margin: auto;
+    height: 100%;
+    width: 25%;
+}
+
+button {
+    display: inline-block;
+    text-align: center;
+    color: #fff;
+
+    border: 1px solid #9c9c9c; /* Fallback style */
+    border: 1px solid rgba(0, 0, 0, 0.3);
+
+    text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+
+    box-shadow: 0 0 .05em rgba(0,0,0,0.4);
+    -moz-box-shadow: 0 0 .05em rgba(0,0,0,0.4);
+    -webkit-box-shadow: 0 0 .05em rgba(0,0,0,0.4);
+}
+
+.beatHeader {
+    height: 15%;
+    text-align: left;
+}
+
+#settingsButton {
+
+}
+
+.beatFooder {
+    height: 20%;
+    text-align: left;
+}
