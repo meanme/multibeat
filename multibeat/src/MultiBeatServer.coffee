@@ -32,36 +32,37 @@ class exports.MultiBeatServer
                 MultiBeatServer.connections[groupId] =
                     id: groupId
                     host: socket.id
-                    clients: new Array()
-
-                MultiBeatServer.connections[groupId]
+                    clients: new Array("#{socket.id}")
 
                 socket.join groupId
                 socket.group = groupId
 
-                socket.emit groupId
+                socket.emit 'socketData', MultiBeatServer.connections[groupId]
 
             socket.on 'join', (data) ->
                 console.log 'join multi beat'
-                console.log MultiBeatServer.connections
+                #console.log MultiBeatServer.connections
 
                 if MultiBeatServer.connections[data]?
                     console.log 'joining ' + data
                     socket.join data
                     socket.group = data
 
+                    MultiBeatServer.connections[data].clients.push socket.id
+
+                    # TODO - Can combine the broadcast and the socketdata
                     socket.emit 'data', "Welcome to #{MultiBeatServer.connections[data].id}"
+                    socket.emit 'socketData', MultiBeatServer.connections[data]
 
                     # Notify all the other clients in the same group
                     socket.broadcast.to(data).emit 'data', "#{socket.id} joined group #{MultiBeatServer.connections[data].id}"
                 else
                     console.log 'group not found'
-                    socket.emit 'group not found'
+                    socket.emit 'data', 'group not found'
 
             socket.on 'beat', (beatData) ->
-                # Decide whether sounds should be player on click or propagated by the server
-                socket.emit 'beat', beatData
-                socket.broadcast.to(socket.group).emit 'beat', beatData
+                #console.log 'beat ' + beatData
+                io.sockets.in(socket.group).emit 'beat', beatData
 
             socket.on 'data', (data) ->
                 console.log 'data received MBS'

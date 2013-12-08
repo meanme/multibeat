@@ -1,14 +1,10 @@
 port = 1337
 
 express = require 'express'
-fs = require 'fs'
 
 multibeat = require './multibeat'
 
-serverLog = fs.createWriteStream './debug.log', {flags: 'a'}
-app = express.createServer(
-    express.logger({stream: serverLog})
-)
+app = express.createServer( )
 
 app.register '.html', require 'jade'
 
